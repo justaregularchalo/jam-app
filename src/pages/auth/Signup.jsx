@@ -5,7 +5,7 @@ import { useRoutes } from "react-router-dom";
 
 
 
-// import service from "../../services/config";
+import service from "../../services/config";
 
 function Signup() {
 
@@ -32,13 +32,13 @@ function Signup() {
   const handleSignup = async (e) => {
     e.preventDefault();
 
-    // contactamos al backend
+    // contactamos al backend, muñeco
     try {
 
       const newUser = { username, email, password, instrument, genre, location }
 
-      await axios.post("http://localhost:5005/api/auth/signup", newUser)
-    // //   await service.post("/auth/signup", newUser)
+    //   await axios.post("http://localhost:5005/api/auth/signup", newUser)
+      await service.post("/auth/signup", newUser)
       navigate("/login")
 
       
@@ -46,7 +46,8 @@ function Signup() {
       console.log(error)
       console.log(error.response.status)
       console.log(error.response.data.errorMessage)
-      // abajo primero analiza que error.response exista
+
+      // revisamos que error.response exista
       if (error.response && error.response.status === 400) {
         setErrorMessage(error.response.data.errorMessage)
       } else {
@@ -164,7 +165,7 @@ function Signup() {
 
         <button type="submit">Sign up</button>
 
-        <p style={{color: "red"}}>{errorMessage}</p>
+        <p style={{color: "purple"}}>{errorMessage}</p>
 
       </form>
       
