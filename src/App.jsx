@@ -1,33 +1,77 @@
 import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
 import './App.css'
 
+//pages
+import Home from "./pages/Home"
+import Signup from "./pages/auth/Signup"
+import Login from "./pages/auth/Login"
+import Error from "./pages/error/Error"
+import NotFound from "./pages/error/NotFound"
+import AllUSers from "./pages/AllUsers.jsx"
+import AllGenres from "./pages/AllGenres.jsx"
+import UserDetails from "./pages/UserDetails.jsx"
+import ProfilePage from "./pages/ProfilePage.jsx"
+import ProfileEdit from "./pages/ProfileEdit.jsx"
+import Messages from "./pages/Messages.jsx"
+
+
+//components
+
+import Comment from "./components/Comment.jsx"
+import Navbar from "./components/Navbar.jsx"
+import Profile from "./components/Profile.jsx"
+
+
+import { Routes, Route } from 'react-router-dom'
+
+
+
+
+
+
+
+
 function App() {
-  const [count, setCount] = useState(0)
+  // const [count, setCount] = useState(0)
+
+
+
+
+
 
   return (
     <>
-      <div>
-        <a href="https://vitejs.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.jsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
+
+
+    <Navbar />
+       <br/>
+       <br/>
+     
+
+    <Routes>
+
+    <Route path="/" element={<Home />} />
+    <Route path="/signup" element={<Signup />} />
+    <Route path="/login" element={<Login />} />
+    <Route path="/all-users" element={<AllUSers />} />
+    <Route path="/all-genres" element={<AllGenres />} />
+    <Route path="/message/:messageId" element={<Messages />} />
+    <Route path="/user-profile" element={<ProfilePage />} />
+    <Route path="/edit-profile" element={<ProfileEdit />} />
+    <Route path="/user-details/:userId" element={<UserDetails />} />
+
+
+
+
+    <Route path="/error" element ={<Error />} />
+    <Route path="*" element ={<NotFound />} />
+
+
+
+    </Routes>
+
+
+
     </>
   )
 }
