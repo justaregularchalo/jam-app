@@ -6,8 +6,9 @@ import { Navigate } from "react-router-dom"
 function IsAdmin(props) {
 
     const {isLoggedIn} = useContext(AuthContext)
+    const {loggedUser} = useContext(AuthContext)
 
-    if(isLoggedIn){
+    if(isLoggedIn && loggedUser){
 
 
         return props.children
