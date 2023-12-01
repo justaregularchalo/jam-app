@@ -3,6 +3,7 @@ import { useContext, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import service from "../../services/config";
 import { AuthContext } from "../../context/auth.context";
+import { NavLink } from "react-router-dom";
 
 function Login() {
 
@@ -50,7 +51,7 @@ function Login() {
   return (
     <div>
 
-      <h1>Formulario de Acceso</h1>
+      <h1>Log</h1>
 
       <form onSubmit={handleLogin}>
         <label>username:</label>
@@ -77,6 +78,8 @@ function Login() {
       </form>
       
       <p style={{color: "purple"}}>{errorMessage}</p>
+
+      <NavLink to="/signup"> Don't have an account? Sign Up</NavLink>
 
     </div>
   );

@@ -2,6 +2,7 @@ import axios from "axios";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useRoutes } from "react-router-dom";
+import { NavLink } from "react-router-dom";
 
 
 
@@ -59,7 +60,7 @@ function Signup() {
   return (
     <div>
 
-      <h1>Formulario de Registro</h1>
+      <h1>Sign up</h1>
     
       <form onSubmit={handleSignup}>
         
@@ -168,6 +169,8 @@ function Signup() {
         <p style={{color: "purple"}}>{errorMessage}</p>
 
       </form>
+
+      <NavLink to="/login"> Have already an account? Log in</NavLink>
       
     </div>
   );

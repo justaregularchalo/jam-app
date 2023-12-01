@@ -18,7 +18,8 @@ function AuthWrapper(props) {
 
         const [isLoggedIn, setIsLoggedIn] = useState (false)
         const [isLoading, setIsLoading] = useState(true)
-        // const [isAdmin, setIsAdmin] = useState (false)
+        const [loggedUser, setLoggedUser]= useState (null)    
+         // const [isAdmin, setIsAdmin] = useState (false)
 
        const authenticateUser = async() => {
 
@@ -39,14 +40,16 @@ function AuthWrapper(props) {
             console.log(response)
             setIsLoggedIn(true)
             setIsLoading(false)
+            setLoggedUser (response.data.payload)
             // setIsAdmin(true)
 
 
         }catch(error){
             // token no es válido o no existe
-            console.log(error)
+            
             setIsLoggedIn(false)
             setIsLoading(false)
+            setLoggedUser(null)
 
         }
 
@@ -63,7 +66,8 @@ function AuthWrapper(props) {
 
 
         const passedContext = {
-            authenticateUser
+            authenticateUser,
+            isLoggedIn
         
         
         }
