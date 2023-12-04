@@ -36,7 +36,7 @@ function Login() {
 
       await authenticateUser() // authenticateUser ejecutamos antes de redireccionar al usuario a la home porque es una funcion asíncrona
 
-      navigate("/") 
+      navigate("/all-users") 
 
     } catch (error) {
       console.log(error)
@@ -74,7 +74,7 @@ function Login() {
 
         <br />
 
-        <button type="submit">Acceder</button>
+        <button type="submit">Log in</button>
       </form>
       
       <p style={{color: "purple"}}>{errorMessage}</p>

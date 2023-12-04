@@ -58,13 +58,24 @@ function Signup() {
   };
 
   return (
-    <div>
 
-      <h1>Sign up</h1>
+    <body className="signup-container">
+
+      <div className="left-column">
+
+      <img src="../images/jam-logo.png" alt="Logo" width={100} />
     
-      <form onSubmit={handleSignup}>
+
+      <div className= "texto-introductorio">
+
+      <h2>Talent shines brighter when shared.</h2>
+      <p>Find musicians in your area and dazzle the world with your music.</p>
+
+      <div className="form-container"> 
+      
+      <form className= "signup-form" onSubmit={handleSignup}>
         
-        <label>username:</label>
+        <label><strong>username</strong></label>
         <input
           type="text"
           name="username"
@@ -74,7 +85,7 @@ function Signup() {
 
         <br />
 
-        <label>email</label>
+        <label><strong>email</strong></label>
         <input
           type="email"
           name="email"
@@ -84,7 +95,7 @@ function Signup() {
 
         <br />
 
-        <label>password</label>
+        <label><strong>password</strong></label>
         <input
           type="password"
           name="password"
@@ -93,7 +104,7 @@ function Signup() {
         />
 
 
-        <label>instrument</label>
+        <label><strong>instrument</strong></label>
         <select
             type="instrument"
             name="instrument"
@@ -114,7 +125,7 @@ function Signup() {
 
         <br />
 
-        <label>music genre</label>
+        <label><strong>music genre</strong></label>
         <select
             type="genre"
             name="genre"
@@ -136,7 +147,7 @@ function Signup() {
 
 
 
-        <label>location</label>
+        <label><strong>location</strong></label>
         <select
             type="location"
             name="location"
@@ -160,19 +171,33 @@ function Signup() {
   
 </select>
 
-
-
-
-
-        <button type="submit">Sign up</button>
+        <button type="submit"> <strong>Sign up</strong></button>
 
         <p style={{color: "purple"}}>{errorMessage}</p>
 
       </form>
-
-      <NavLink to="/login"> Have already an account? Log in</NavLink>
       
+    <div className="signup-link">
+
+      <NavLink to="/login"> Have already an account? <strong>Log in</strong></NavLink>
+      
+      </div>
+      
+      </div>
+
+
+      </div>
+
+
     </div>
+
+      <div className="right-column">
+      
+      <img src="../images/jam-signup.jpg" alt="signup" width={700}/>
+      </div> 
+   
+      
+    </body>
   );
 }
 

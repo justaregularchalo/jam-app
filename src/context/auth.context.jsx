@@ -37,7 +37,7 @@ function AuthWrapper(props) {
             const response = await service.get("/auth/verify")
             //token válido, manué
 
-            console.log(response)
+            // console.log(response)
             setIsLoggedIn(true)
             setIsLoading(false)
             setLoggedUser (response.data.payload)
@@ -67,7 +67,8 @@ function AuthWrapper(props) {
 
         const passedContext = {
             authenticateUser,
-            isLoggedIn
+            isLoggedIn,
+            loggedUser
         
         
         }

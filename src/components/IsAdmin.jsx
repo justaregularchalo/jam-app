@@ -1,25 +1,26 @@
-import React, { useContext } from "react"
-import { AuthContext } from "../context/auth.context"
-import { Navigate } from "react-router-dom"
+// import React, { useContext } from "react"
+// import { AuthContext } from "../context/auth.context"
+// import { Navigate } from "react-router-dom"
 
 
-function IsAdmin(props) {
+// function IsAdmin(props) {
 
-    const {isLoggedIn} = useContext(AuthContext)
-    const {loggedUser} = useContext(AuthContext)
+//     const {isLoggedIn} = useContext(AuthContext)
+//     const {loggedUser} = useContext(AuthContext)
+//     console.log(loggedUser, "AQUIIII!!!")
 
-    if(isLoggedIn && loggedUser){
-
-
-        return props.children
+//     if(isLoggedIn && loggedUser){
 
 
-    }else {
+//         return props.children
 
-        return <Navigate to={"/all-users"} />
-    }
+
+//     }else {
+
+//         return <Navigate to={"/all-users"} />
+//     }
 
     
-}
+// }
 
-export default IsAdmin
+// export default IsAdmin
