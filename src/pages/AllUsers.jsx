@@ -35,7 +35,7 @@ function AllUsers() {
     
 
 
-  },[users])
+  },[])
 
   
   const getUsers = async () => {
