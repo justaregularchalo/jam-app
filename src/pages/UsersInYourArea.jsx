@@ -10,7 +10,7 @@ import {jwtDecode} from "jwt-decode"
 
 
 
-function AllUsers() {
+function UsersInYourArea() {
 
   const { authenticateUser } = useContext( AuthContext )
 
@@ -24,7 +24,7 @@ function AllUsers() {
   const [instruments, setInstruments] = useState(null)
   const [locations, setLocations] = useState(null)
 
-  const [ownId, setOwnId] = useState(null)
+  const [userLocation, setUserLocation] = useState(null)
 
 
 
@@ -35,7 +35,7 @@ function AllUsers() {
     
 
 
-  },[users])
+  },[])
 
   
   const getUsers = async () => {
@@ -57,14 +57,14 @@ function AllUsers() {
       if(index > -1){
 
         
-        setOwnId(response.data[index]._id)
+        setUserLocation(response.data[index].location)
       } // esto corrobora que si hay dato, nos va a devolver la location de nuestro user maligno
 
-      console.log(response.data[index]._id)
+      console.log(response.data[index].location)
       // console.log(response)
       const users = response.data.filter((eachUser)=>{
 
-        if( eachUser._id !== tokenId){ //filtro de solo users de la misma ciudad pero que no sea el usuario online
+        if(eachUser.location == userLocation && eachUser._id !== tokenId){ //filtro de solo users de la misma ciudad pero que no sea el usuario online
 
           return eachUser
 
@@ -142,10 +142,10 @@ function AllUsers() {
 
   return (
 
-    <div className="all-users-container">
+    <div>
 
 
-    <h3>All Artists </h3>
+    <h3>Artists in {userLocation} </h3>
 
     <div>
 
@@ -187,4 +187,4 @@ function AllUsers() {
 
 }
 
-export default AllUsers
+export default UsersInYourArea

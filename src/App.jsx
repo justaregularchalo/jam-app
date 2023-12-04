@@ -2,16 +2,16 @@ import { useState } from 'react'
 import './App.css'
 
 //pages
-import Home from "./pages/Home"
+
 import Signup from "./pages/auth/Signup"
 import Login from "./pages/auth/Login"
 import Error from "./pages/error/Error"
 import NotFound from "./pages/error/NotFound"
 import AllUsers from "./pages/AllUsers.jsx"
-import AllGenres from "./pages/AllGenres.jsx"
-import UserDetails from "./pages/UserDetails.jsx"
+import UsersInYourArea from "./pages/UsersInYourArea.jsx"
 import ProfilePage from "./pages/ProfilePage.jsx"
 import ProfileEdit from "./pages/ProfileEdit.jsx"
+import MyProfile from "./pages/MyProfile.jsx"
 import Messages from "./pages/Messages.jsx"
 
 
@@ -55,10 +55,11 @@ function App() {
     {/* <Route path="/" element={<Home />} /> */}
     <Route path="/signup" element={<Signup />} />
     <Route path="/login" element={<Login />} />
-    <Route path="/all-users" element={<AllUsers />} />
-    <Route path="/all-genres" element={<AllGenres />} />
+    <Route path="/artists" element={<AllUsers />} />
+    <Route path="/artists-your-area" element={<UsersInYourArea />} />
     <Route path="/message/:messageId" element={<Messages />} />
     <Route path="/profile/:userId" element={<ProfilePage />} />
+    <Route path="/my-profile" element={<MyProfile />} />
     <Route path="/edit-profile" element={<ProfileEdit />} />
     
 

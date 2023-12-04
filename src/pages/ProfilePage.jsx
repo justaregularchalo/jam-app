@@ -2,6 +2,7 @@ import { Link, useParams } from "react-router-dom";
 import axios from "axios";
 import { useState, useEffect } from "react";
 import service from "../services/config";
+import { NavLink } from "react-router-dom";
 
 
 function ProfilePage() {
@@ -54,7 +55,7 @@ function ProfilePage() {
       <h1>{userDetails.username}</h1> 
         
 
-       <img src="" alt="muñeco" />
+       <img src="" alt={userDetails.username} />
 
       <p> <strong>Instrument:  </strong> {userDetails.instrument}</p>
 
@@ -73,6 +74,9 @@ function ProfilePage() {
 
       </div>
       
+      <button>
+            <NavLink to={"/artists"}>See all artists</NavLink>
+          </button>
 
 
 

@@ -36,10 +36,10 @@ function Navbar() {
   if (isLoggedIn) {
     return (
       <nav>
-        <NavLink to="/" style={toggleStyles}>Home</NavLink>|
-        <NavLink to="/all-users" style={toggleStyles}>All Users</NavLink>|
-        <NavLink to="/all-genres" style={toggleStyles}>All Genres</NavLink>|
-        <NavLink to="/user-profile" style={toggleStyles}>My Profile</NavLink>|
+        {/* <NavLink to="/" style={toggleStyles}>Home</NavLink>| */}
+        <NavLink to="/artists" style={toggleStyles}>all artists</NavLink>|
+        <NavLink to="/artists-your-area" style={toggleStyles}>artists in your area</NavLink>|
+        <NavLink to="/my-profile" style={toggleStyles}>my profile</NavLink>|
 
         {/* <NavLink to="/admin" style={toggleStyles}>Admin</NavLink>| */}
         <p onClick={handleLogout}>Log Out</p>

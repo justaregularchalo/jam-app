@@ -29,6 +29,7 @@ function AuthWrapper(props) {
         // sino existe o o es válido, is LoggedIn =falsete
 
 
+        
        
 
 
@@ -56,7 +57,8 @@ function AuthWrapper(props) {
 
 
 }
-
+    console.log(isLoggedIn, loggedUser)
+    
     // al iniciar sección se valida el token 
         useEffect (()=>{
 

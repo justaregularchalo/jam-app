@@ -36,7 +36,7 @@ function Login() {
 
       await authenticateUser() // authenticateUser ejecutamos antes de redireccionar al usuario a la home porque es una funcion asíncrona
 
-      navigate("/all-users") 
+      navigate("/artists") 
 
     } catch (error) {
       console.log(error)
