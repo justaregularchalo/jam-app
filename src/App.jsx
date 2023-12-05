@@ -54,7 +54,7 @@ function App() {
 
     {/* <Route path="/" element={<Home />} /> */}
     <Route path="/signup" element={<Signup />} />
-    <Route path="/login" element={<Login />} />
+    <Route path="/" element={<Login />} />
     <Route path="/artists" element={<AllUsers />} />
     <Route path="/artists-your-area" element={<UsersInYourArea />} />
     <Route path="/message/:messageId" element={<Messages />} />

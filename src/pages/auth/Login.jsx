@@ -27,7 +27,7 @@ function Login() {
       
       const userValidationCredentials = { username, password }
 
-      const response = await service.post("/auth/login", userValidationCredentials)
+      const response = await service.post("/auth", userValidationCredentials)
       console.log(response)
 
       // almacenamos el token en una variable localStorage

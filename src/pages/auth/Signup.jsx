@@ -40,7 +40,7 @@ function Signup() {
 
     //   await axios.post("http://localhost:5005/api/auth/signup", newUser)
       await service.post("/auth/signup", newUser)
-      navigate("/login")
+      navigate("/")
 
       
     } catch (error) {
