@@ -6,7 +6,7 @@ import service from "../services/config";
 function MyProfile() {
 
       
-  console.log(loggedUser)
+  // console.log(loggedUser)
 
 
 
