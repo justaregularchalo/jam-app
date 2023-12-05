@@ -155,7 +155,7 @@ function AllUsers() {
 
       return (
 
-      <div>
+      <div key={eachUser.username}>
 
         <img src={eachUser.picProfile} alt={eachUser.username} />
         <p>Name: {eachUser.username}</p>

@@ -75,6 +75,8 @@ function AuthWrapper(props) {
         
         }
 
+        console.log(passedContext)
+
         if(isLoading){
 
         return <h3>...validating credentials</h3>

@@ -24,7 +24,7 @@ function UsersInYourArea() {
   const [instruments, setInstruments] = useState(null)
   const [locations, setLocations] = useState(null)
 
-  const [userLocation, setUserLocation] = useState(null)
+  const [userLocation, setUserLocation] = useState("")
 
 
 
@@ -44,9 +44,10 @@ function UsersInYourArea() {
       
       const response = await service.get("/all-users")
       const payload = jwtDecode(localStorage.getItem("authToken"))
-      console.log(payload) //decodificar el token para encontrar el id del perfil del usuairo en activo y hacer el search
+      // console.log(payload) //decodificar el token para encontrar el id del perfil del usuairo en activo y hacer el search
 
       const tokenId = payload._id
+      console.log(response)
       const index =response.data.map((user)=>{
 
         return user._id
@@ -60,11 +61,13 @@ function UsersInYourArea() {
         setUserLocation(response.data[index].location)
       } // esto corrobora que si hay dato, nos va a devolver la location de nuestro user maligno
 
-      console.log(response.data[index].location)
+      // console.log(response.data[index].location)
       // console.log(response)
+      // console.log(userLocation)
+     
       const users = response.data.filter((eachUser)=>{
-
-        if(eachUser.location == userLocation && eachUser._id !== tokenId){ //filtro de solo users de la misma ciudad pero que no sea el usuario online
+        
+        if(eachUser.location == response.data[index].location && eachUser._id !== tokenId){ //filtro de solo users de la misma ciudad pero que no sea el usuario online
 
           return eachUser
 
@@ -72,6 +75,7 @@ function UsersInYourArea() {
 
 
       })
+      console.log(users)
       setUsers(users)
       setIsLoading(false)
       console.log(response)
@@ -155,7 +159,7 @@ function UsersInYourArea() {
 
       return (
 
-      <div>
+      <div key={eachUser.username}>
 
         <img src={eachUser.picProfile} alt={eachUser.username} />
         <p>Name: {eachUser.username}</p>

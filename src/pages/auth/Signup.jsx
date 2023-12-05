@@ -63,7 +63,7 @@ function Signup() {
 
       <div className="left-column">
 
-      <img src="../images/jam-logo.png" alt="Logo" width={100} />
+      <img src="./images/jam-logo.png" alt="Logo" width={100} />
     
 
       <div className= "texto-introductorio">
@@ -193,7 +193,7 @@ function Signup() {
 
       <div className="right-column">
       
-      <img src="../images/jam-signup.jpg" alt="signup" width={700}/>
+      <img src="./images/jam-signup.jpg" alt="signup" width={700}/>
       </div> 
    
       
