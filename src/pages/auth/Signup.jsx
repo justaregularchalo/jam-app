@@ -179,7 +179,7 @@ function Signup() {
       
     <div className="signup-link">
 
-      <NavLink to="/login"> Have already an account? <strong>Log in</strong></NavLink>
+      <NavLink to="/"> Have already an account? <strong>Log in</strong></NavLink>
       
       </div>
       
