@@ -2,14 +2,14 @@ import { useContext, useEffect, useState } from "react";
 import { AuthContext } from "../context/auth.context";
 import { useNavigate } from "react-router-dom";
 import service from "../services/config";
-
-
+import axios from "axios";
 
 function MyProfile() {
-  const { loggedUser } = useContext(AuthContext)
+  const { loggedUser } = useContext(AuthContext);
 
   // console.log(loggedUser)
-
+  const [imageUrl, setImageUrl] = useState(null);
+  const [isUploading, setIsUploading] = useState(false);
 
   const [isLoading, setIsloading] = useState(true);
 
@@ -21,7 +21,8 @@ function MyProfile() {
   const [genre, setGenre] = useState("");
   const [location, setLocation] = useState("");
   const [bio, setBio] = useState("");
-
+  const [picProfile, setPicProfile] = useState("");
+  const [vidProfile, setVidProfile] = useState("");
 
   // messagios de error
   const [errorMessage, setErrorMessage] = useState("");
@@ -32,17 +33,30 @@ function MyProfile() {
   const handleGenreChange = (e) => setGenre(e.target.value);
   const handleLocationChange = (e) => setLocation(e.target.value);
   const handleBioChange = (e) => setBio(e.target.value);
+  const handlePicProfileChange = (e) => setPicProfile(e.target.value);
+  const handleVidProfileChange = (e) => setVidProfile(e.target.value);
+  
+  
 
   const handleSignup = async (e) => {
     e.preventDefault();
 
+
     // contactamos al backend, muñeco
     try {
-      const editUser = { instrument, genre, username, location,bio};
+      const editUser = {
+        instrument,
+        genre,
+        username,
+        location,
+        bio,
+        picProfile,
+        vidProfile,
+      };
 
       // await axios.post("http://localhost:5005/api/auth/signup", newUser)
       await service.put(`/profile/${loggedUser._id}`, editUser); //esta sería la ruta post
-      getMyProfile()
+      getMyProfile();
       navigate("/my-profile");
     } catch (error) {
       console.log(error);
@@ -55,8 +69,6 @@ function MyProfile() {
       } else {
         navigate("/error"); // 500
       }
-
-      
     }
   };
 
@@ -72,12 +84,55 @@ function MyProfile() {
       setInsrument(response.data.instrument);
       setGenre(response.data.genre);
       setLocation(response.data.location);
-      setBio(response.data.bio)
+      setBio(response.data.bio);
+      setPicProfile(response.data.picProfile);
+      setVidProfile(response.data.vidProfile);
       setIsloading(false);
     } catch (error) {
       console.log(error);
     }
   };
+
+  const handleFileUpload = async (event) => {
+    if (!event.target.files[0]) {
+      // to prevent accidentally clicking the choose file button and not selecting a file
+      return;
+    }
+    setIsUploading(true); // to start the loading animation
+    const uploadData = new FormData(); // images and other files need to be sent to the backend in a FormData
+    uploadData.append("image", event.target.files[0]);
+    //                   |
+    //     this name needs to match the name used in the middleware in the backend => uploader.single("image")
+    try {
+      const response = await service.post(
+        "/edited-image",
+        uploadData
+      );
+      // !IMPORTANT: Adapt the request structure to the one in your proyect (services, .env, auth, etc...)
+      setImageUrl(response.data.imageUrl);
+      //                          |
+      //     this is how the backend sends the image to the frontend => res.json({ imageUrl: req.file.path });
+      setIsUploading(false); // to stop the loading animation
+    } catch (error) {
+      navigate("/error");
+    }
+  };
+
+  const handleSubmit = async (event) => {
+    event.preventDefault();
+    const newItem = {
+      name: name,
+      image: imageUrl
+    }
+
+    try {
+      await axios.post("http://localhost:5005/api/my-profile", newItem)
+
+      navigate("/my-profile/:userId")
+    } catch(err){
+      navigate("/error")
+    }
+  }
 
   if (isLoading) {
     return <h3>...lodeando</h3>;
@@ -85,10 +140,15 @@ function MyProfile() {
 
   return (
     <div>
-      <form className="upload-picture">
-        <img src="" alt="profile-pic" />
-      </form>
-
+          <form onSubmit={handleSubmit}>
+            <label>Image: </label>
+            <input
+              type="file"
+              name="image"
+              onChange={handleFileUpload}
+              disabled={isUploading}
+            />
+          </form>
       <form className="edit-form" onSubmit={handleSignup}>
         <div className="info-container">
           <label>
@@ -100,11 +160,7 @@ function MyProfile() {
             value={username}
             onChange={handleUsernameChange}
           />
-
-
-
           <br />
-
           <label>
             <strong>instrument</strong>
           </label>
@@ -124,9 +180,7 @@ function MyProfile() {
             <option value="Violin">Violin</option>
             <option value="Percussion">Percussion</option>
           </select>
-
           <br />
-
           <label>
             <strong>music genre</strong>
           </label>
@@ -145,9 +199,7 @@ function MyProfile() {
             <option value="Indie">Indie</option>
             <option value="Flamenco">Flamenco</option>
           </select>
-
           <br />
-
           <label>
             <strong>bio</strong>
           </label>
@@ -157,9 +209,7 @@ function MyProfile() {
             value={bio}
             onChange={handleBioChange}
           />
-
           <br />
-          
           <label>
             <strong>location</strong>
           </label>
