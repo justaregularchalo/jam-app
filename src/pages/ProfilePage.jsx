@@ -9,7 +9,7 @@ import { AuthContext } from "../context/auth.context";
 function ProfilePage() {
   const { loggedUser } = useContext(AuthContext);
   const params = useParams();
-  console.log(params);
+  // console.log(params);
 
   const [userDetails, setUserDetails] = useState(null);
   const [isLoading, setIsloading] = useState(true);
@@ -19,8 +19,6 @@ function ProfilePage() {
   const [comments, setComments] = useState([]);
 
   const [newComment, setNewComment] = useState("");
-
-  
 
   const handleCommentSubmit = async (e) => {
     e.preventDefault();
@@ -57,6 +55,7 @@ function ProfilePage() {
 
       const commentsResponse = await service.get(`/comment/${params.userId}`);
       setComments(commentsResponse.data);
+      console.log(commentsResponse.data)
     } catch (error) {
       console.log(error);
     }
@@ -65,6 +64,12 @@ function ProfilePage() {
   if (isLoading) {
     return <h3>...lodeando</h3>;
   }
+
+  function commentOnProfile(comment) {
+    return comment.user === params.userId;
+  }
+
+  const CommentToShow = comments.filter(commentOnProfile);
 
   return (
     <div>
@@ -95,6 +100,10 @@ function ProfilePage() {
       <div className="video-container">
         <img src="" alt="" />
 
+        <button>
+          <NavLink to={"/artists"}>See all artists</NavLink>
+        </button>
+
         <form onSubmit={handleCommentSubmit}>
           <label htmlFor="comment">
             <strong>Comment:</strong>
@@ -116,16 +125,15 @@ function ProfilePage() {
         <div className="comments-container">
           <h2>Comments:</h2>
           <ul>
-            {comments.map((comment) => (
-              <li key={comment._id}>{comment.comment}</li>
+            {CommentToShow.map((comment) => (
+              <li key={comment._id}>
+                <p>{comment.comment}</p>
+                <p>By: {comment.commenter.username}</p>
+              </li>
             ))}
           </ul>
         </div>
       </div>
-
-      <button>
-        <NavLink to={"/artists"}>See all artists</NavLink>
-      </button>
     </div>
   );
 }

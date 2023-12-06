@@ -157,7 +157,7 @@ function AllUsers() {
 
       <div key={eachUser.username}>
 
-        <img src={eachUser.picProfile} alt={eachUser.username} />
+        <img src={eachUser.picProfile} alt={eachUser.username} width={200}/>
         <p>Name: {eachUser.username}</p>
         <p>Instrument: {eachUser.instrument}</p>
         <p>location: {eachUser.location}</p>
