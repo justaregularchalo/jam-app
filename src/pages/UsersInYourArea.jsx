@@ -47,7 +47,7 @@ function UsersInYourArea() {
       // console.log(payload) //decodificar el token para encontrar el id del perfil del usuairo en activo y hacer el search
 
       const tokenId = payload._id
-      console.log(response)
+      // console.log(response)
       const index =response.data.map((user)=>{
 
         return user._id
@@ -128,7 +128,7 @@ function UsersInYourArea() {
       
     }catch(error){
       
-      console.log(error)
+      // console.log(error)
       
     }
     

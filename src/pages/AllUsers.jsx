@@ -32,7 +32,7 @@ function AllUsers() {
   useEffect(()=>{
 
     getUsers()
-    
+    // 
 
 
   },[])
@@ -44,7 +44,7 @@ function AllUsers() {
       
       const response = await service.get("/all-users")
       const payload = jwtDecode(localStorage.getItem("authToken"))
-      console.log(payload) //decodificar el token para encontrar el id del perfil del usuairo en activo y hacer el search
+      // console.log(payload) //decodificar el token para encontrar el id del perfil del usuairo en activo y hacer el search
 
       const tokenId = payload._id
       const index =response.data.map((user)=>{
@@ -124,7 +124,7 @@ function AllUsers() {
       
     }catch(error){
       
-      console.log(error)
+      // console.log(error)
       
     }
     

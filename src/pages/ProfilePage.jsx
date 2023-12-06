@@ -140,8 +140,8 @@ function ProfilePage() {
           <ul>
             {comments.map((comment) => (
               <li key={comment._id}>
+                <p><strong>{comment.commenter.username}</strong></p>
                 <p>{comment.comment}</p>
-                <p>By: </p>
                 
               </li>
             ))}

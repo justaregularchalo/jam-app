@@ -5,9 +5,7 @@ import { useNavigate } from "react-router-dom";
 import service from "../services/config";
 import axios from "axios";
 
-
 function Messages() {
-
   const { loggedUser } = useContext(AuthContext);
   const params = useParams();
 
@@ -15,42 +13,30 @@ function Messages() {
   const [userDetails, setUserDetails] = useState(null);
   const navigate = useNavigate();
 
-  const [messages, setMessages] = useState([])
-  const [newMessage, setNewMessage] =useState("")
+  const [messages, setMessages] = useState([]);
+  const [newMessage, setNewMessage] = useState("");
 
-  const handleMessageSubmit = async (e) =>{
+  const handleMessageSubmit = async (e) => {
+    e.preventDefault();
 
-      e.preventDefault();
+    try {
+      const messageCreated = {
+        sender: loggedUser._id,
+        receiver: params.userId,
+        message: newMessage,
+      };
 
-      try{
-
-        const messageCreated = {
-
-          sender: loggedUser._id,
-          receiver:params.userId,
-          message: newMessage,
-
-
-
-        };
-
-
-        await service.post (`messages/${params.userId}`, messageCreated)
-        getUsers();
-        setNewMessage("");
-        navigate(`/messages/${params.userId}`)
-      }catch(error){
-
-
-        console.log(error)
-      }
-
+      await service.post(`messages/${params.userId}`, messageCreated);
+      getUsers();
+      setNewMessage("");
+      navigate(`/messages/${params.userId}`);
+    } catch (error) {
+      console.log(error);
+    }
   };
 
-  useEffect (()=>{
-
-    getUsers()
-
+  useEffect(() => {
+    getUsers();
   }, []);
 
   const getUsers = async () => {
@@ -64,7 +50,7 @@ function Messages() {
 
       const allMessages = await service.get(`/messages/${params.userId}`);
       setMessages(allMessages.data);
-      console.log(allMessages.data)
+      console.log(allMessages.data);
     } catch (error) {
       console.log(error);
     }
@@ -79,65 +65,46 @@ function Messages() {
   };
 
   const messagesToShow = messages
-  .filter(filterMessagesByReceiver)
-  .sort((a,b ) => new Date(a.createdAt) - new Date(b.createdAt));
-
-
+    .filter(filterMessagesByReceiver)
+    .sort((a, b) => new Date(a.createdAt) - new Date(b.createdAt));
 
   return (
     <div>
-      
-      
-      
-      <h2 className="messages-title"> <strong>Messages with {userDetails.username}</strong> </h2>
-    
-        <div className="message-container">
-          <h4>Messages</h4>
-          <ul>
-            {messagesToShow .map((message) => (
-              <li key={message._id}>
-                <p>{message.message}</p>
-                <p>By: {loggedUser.username}</p>
-                
-              </li>
-            ))}
-          </ul>
-        </div>
+      <h2 className="messages-title">
+        {" "}
+        <strong>Messages with {userDetails.username}</strong>{" "}
+      </h2>
+
+      <div className="message-container">
+        <h4>Messages</h4>
+        <ul>
+          {messagesToShow.map((message) => (
+            <li key={message._id}>
+              <p>
+                <strong>{message.sender.username}</strong>
+              </p>
+              <p>{message.message}</p>
+            </li>
+          ))}
+        </ul>
+      </div>
 
       <form onSubmit={handleMessageSubmit}>
-          <label htmlFor="message">
-            <strong>Say sumthing!</strong>
-          </label>
-          <textarea
-            id="message"
-            name="message"
-            maxLength={200}
-            rows={6}
-            value={newMessage}
-            onChange={(e) => setNewMessage(e.target.value)}
-          ></textarea>
-          <button type="submit">Send Message</button>
-        </form>
-
-
-
-
-
-
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
+        <label htmlFor="message">
+          <strong>Say sumthing!</strong>
+        </label>
+        <textarea
+          id="message"
+          name="message"
+          maxLength={200}
+          rows={6}
+          value={newMessage}
+          onChange={(e) => setNewMessage(e.target.value)}
+        ></textarea>
+        <button type="submit">Send Message</button>
+      </form>
     </div>
-  )
+  );
 }
 
-export default Messages
+export default Messages;
