@@ -3,6 +3,8 @@ import { AuthContext } from "../context/auth.context";
 import { useNavigate } from "react-router-dom";
 import service from "../services/config";
 import axios from "axios";
+import { useParams } from "react-router-dom";
+
 
 function MyProfile() {
   const { loggedUser } = useContext(AuthContext);
@@ -23,6 +25,7 @@ function MyProfile() {
   const [bio, setBio] = useState("");
   const [picProfile, setPicProfile] = useState("");
   const [vidProfile, setVidProfile] = useState("");
+  const [comments, setComments] = useState([]);
 
   // messagios de error
   const [errorMessage, setErrorMessage] = useState("");
@@ -35,8 +38,7 @@ function MyProfile() {
   const handleBioChange = (e) => setBio(e.target.value);
   const handlePicProfileChange = (e) => setPicProfile(e.target.value);
   const handleVidProfileChange = (e) => setVidProfile(e.target.value);
-  
-  
+
 
   const handleSignup = async (e) => {
     e.preventDefault();
@@ -74,15 +76,19 @@ function MyProfile() {
 
   useEffect(() => {
     getMyProfile();
+    userComment();
   }, []);
 
-  const getPicProfile = async () =>{
-    try {
-      const response = await service.get
-    } catch (err){
-      console.log(err)
-    }
-  }
+
+
+
+  // const getPicProfile = async () =>{
+  //   try {
+  //     const response = await service.get
+  //   } catch (err){
+  //     console.log(err)
+  //   }
+  // }
 
   const getMyProfile = async () => {
 
@@ -142,6 +148,30 @@ function MyProfile() {
       navigate("/error")
     }
   }
+
+  const userComment = async (e) => {
+    try {
+
+
+      const profileComment = await service.get(`comment/${loggedUser._id}`);
+setComments(profileComment.data)
+console.log("AAAAAAA", comments)
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+const handleToDeleteComment = async (e) => {
+  e.preventDefault()
+
+  try {
+    const commentDeleted = await service.get(`comment/${loggedUser._id}`)
+    setComments(commentDeleted)
+
+  } catch(err){
+    console.log(err)
+  }
+} 
 
   if (isLoading) {
     return <h3>...lodeando</h3>;
@@ -262,6 +292,20 @@ function MyProfile() {
 
         <p style={{ color: "purple" }}>{errorMessage}</p>
       </form>
+
+      <div className="comments-container">
+          <h2>Comments:</h2>
+          <ul>
+            {comments.map((comments) => (
+              <li key={comments._id}>
+                <p><strong>{comments.commenter.username}</strong></p>
+                <p>{comments.comment}</p>
+                
+                <button onClick={handleToDeleteComment} type="delete">Delete</button>
+              </li>
+            ))}
+          </ul>
+        </div>
     </div>
   );
 }

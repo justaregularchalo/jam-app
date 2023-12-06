@@ -3,15 +3,15 @@ import { useContext, useEffect, useState } from "react";
 import { AuthContext } from "../context/auth.context";
 import { useNavigate } from "react-router-dom";
 import service from "../services/config";
-import axios from "axios";
+
 
 function Messages() {
   const { loggedUser } = useContext(AuthContext);
   const params = useParams();
+  const navigate = useNavigate();
 
   const [isLoading, setIsloading] = useState(true);
   const [userDetails, setUserDetails] = useState(null);
-  const navigate = useNavigate();
 
   const [messages, setMessages] = useState([]);
   const [newMessage, setNewMessage] = useState("");
@@ -28,6 +28,13 @@ function Messages() {
 
       await service.post(`messages/${params.userId}`, messageCreated);
       getUsers();
+      setMessages((previousMessages) => {
+        const newArrMess = [...previousMessages]
+
+        newArrMess.push(messageCreated)
+        return newArrMess
+      });
+
       setNewMessage("");
       navigate(`/messages/${params.userId}`);
     } catch (error) {
@@ -40,7 +47,7 @@ function Messages() {
   }, []);
 
   const getUsers = async () => {
-    console.log(params.userId);
+    // console.log(params.userId);
 
     try {
       const response = await service.get(`/profile/${params.userId}`);
@@ -50,7 +57,7 @@ function Messages() {
 
       const allMessages = await service.get(`/messages/${params.userId}`);
       setMessages(allMessages.data);
-      console.log(allMessages.data);
+      // console.log(allMessages.data);
     } catch (error) {
       console.log(error);
     }
