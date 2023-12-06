@@ -76,7 +76,16 @@ function MyProfile() {
     getMyProfile();
   }, []);
 
+  const getPicProfile = async () =>{
+    try {
+      const response = await service.get
+    } catch (err){
+      console.log(err)
+    }
+  }
+
   const getMyProfile = async () => {
+
     try {
       const response = await service.get("/my-profile");
       setUsername(response.data.username);
@@ -85,14 +94,14 @@ function MyProfile() {
       setGenre(response.data.genre);
       setLocation(response.data.location);
       setBio(response.data.bio);
-      setPicProfile(response.data.picProfile);
+      setPicProfile(response.data.picProfile)
       setVidProfile(response.data.vidProfile);
       setIsloading(false);
     } catch (error) {
       console.log(error);
     }
   };
-
+//! esto es para guardar la imagen
   const handleFileUpload = async (event) => {
     if (!event.target.files[0]) {
       // to prevent accidentally clicking the choose file button and not selecting a file
@@ -109,7 +118,7 @@ function MyProfile() {
         uploadData
       );
       // !IMPORTANT: Adapt the request structure to the one in your proyect (services, .env, auth, etc...)
-      setImageUrl(response.data.imageUrl);
+      
       //                          |
       //     this is how the backend sends the image to the frontend => res.json({ imageUrl: req.file.path });
       setIsUploading(false); // to stop the loading animation
@@ -140,7 +149,9 @@ function MyProfile() {
 
   return (
     <div>
+      {picProfile && <img src={picProfile} alt="Profile" width={150}/>}
           <form onSubmit={handleSubmit}>
+      {imageUrl && <img src={imageUrl} alt="Profile" width={150}/>}
             <label>Image: </label>
             <input
               type="file"
