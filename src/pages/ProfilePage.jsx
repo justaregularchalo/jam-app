@@ -72,11 +72,16 @@ function ProfilePage() {
 
   const CommentToShow = comments.filter(commentOnProfile);
 
+
+ 
+
+
+
   return (
     <div>
       <h1>{userDetails.username}</h1>
 
-      <img src="" alt={userDetails.username} />
+      <img src={userDetails.picProfile} alt={userDetails.username} width={200} />
 
       <p>
         {" "}
@@ -101,7 +106,13 @@ function ProfilePage() {
       <div className="video-container">
         <img src="" alt="" />
 
-        <button>
+        <button className="message-button">
+          <NavLink to={`/messages/${params.userId}`}>Send a Message</NavLink>
+        </button>
+
+      <br />
+      <br />
+        <button className="all-artists-button">
           <NavLink to={"/artists"}>See all artists</NavLink>
         </button>
 
@@ -130,6 +141,7 @@ function ProfilePage() {
               <li key={comment._id}>
                 <p>{comment.comment}</p>
                 <p>By: {loggedUser.username}</p>
+                
               </li>
             ))}
           </ul>

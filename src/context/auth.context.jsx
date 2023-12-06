@@ -44,6 +44,7 @@ function AuthWrapper(props) {
             setLoggedUser (response.data.payload)
             // setIsAdmin(true)
 
+           
 
         }catch(error){
             // token no es válido o no existe

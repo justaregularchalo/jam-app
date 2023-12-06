@@ -18,7 +18,7 @@ function Navbar() {
     authenticateUser()
 
     // redireccinamos al login con navigate
-    navigate("/signup")
+    navigate("/")
   }
 
   const toggleStyles = (navInfo) => {

@@ -57,10 +57,10 @@ function App() {
     <Route path="/" element={<Login />} />
     <Route path="/artists" element={<AllUsers />} />
     <Route path="/artists-your-area" element={<UsersInYourArea />} />
-    <Route path="/message/:messageId" element={<Messages />} />
+    <Route path="/messages/:userId" element={<Messages />} />
     <Route path="/profile/:userId" element={<ProfilePage />} />
     <Route path="/my-profile" element={<MyProfile />} />
-    <Route path="/edit-profile" element={<ProfileEdit />} />
+    {/* <Route path="/edit-profile" element={<ProfileEdit />} /> */}
     
 
   
