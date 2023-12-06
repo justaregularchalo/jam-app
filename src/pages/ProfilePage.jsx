@@ -43,7 +43,7 @@ function ProfilePage() {
 
   useEffect(() => {
     getUsers();
-  }, [params.userId]);
+  }, []);
 
   const getUsers = async () => {
     console.log(params.userId);
@@ -52,11 +52,12 @@ function ProfilePage() {
       const response = await service.get(`/profile/${params.userId}`);
 
       setUserDetails(response.data);
-      setIsloading(false);
-
+      
+      
       const commentsResponse = await service.get(`/comment/${params.userId}`);
-      setComments(commentsResponse.data);
       console.log(commentsResponse.data)
+      setComments(commentsResponse.data);
+      setIsloading(false);
     } catch (error) {
       console.log(error);
     }
@@ -66,11 +67,11 @@ function ProfilePage() {
     return <h3>...lodeando</h3>;
   }
 
-  function commentOnProfile(comment) {
-    return comment.user === params.userId;
-  }
+  // function commentOnProfile(comment) {
+  //   return comment.user === params.userId;
+  // }
 
-  const CommentToShow = comments.filter(commentOnProfile);
+  // const CommentToShow = comments.filter(commentOnProfile);
 
 
  
@@ -137,10 +138,10 @@ function ProfilePage() {
         <div className="comments-container">
           <h2>Comments:</h2>
           <ul>
-            {CommentToShow.map((comment) => (
+            {comments.map((comment) => (
               <li key={comment._id}>
                 <p>{comment.comment}</p>
-                <p>By: {loggedUser.username}</p>
+                <p>By: </p>
                 
               </li>
             ))}
