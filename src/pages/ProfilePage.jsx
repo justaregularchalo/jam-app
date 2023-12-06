@@ -6,6 +6,7 @@ import { NavLink } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
 import { AuthContext } from "../context/auth.context";
 
+
 function ProfilePage() {
   const { loggedUser } = useContext(AuthContext);
   const params = useParams();
@@ -128,7 +129,7 @@ function ProfilePage() {
             {CommentToShow.map((comment) => (
               <li key={comment._id}>
                 <p>{comment.comment}</p>
-                <p>By: {comment.commenter.username}</p>
+                <p>By: {loggedUser.username}</p>
               </li>
             ))}
           </ul>
