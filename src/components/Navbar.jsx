@@ -42,6 +42,10 @@ function Navbar() {
           artists in your area
         </NavLink>
         |
+        <NavLink to="/artists-your-genre" style={toggleStyles}>
+          artists from your genre
+        </NavLink>
+        |
         <NavLink to="/my-profile" style={toggleStyles}>
           my profile
         </NavLink>

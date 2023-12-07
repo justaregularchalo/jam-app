@@ -19,6 +19,7 @@ import Messages from "./pages/Messages.jsx";
 import Navbar from "./components/Navbar.jsx";
 
 import { Routes, Route } from "react-router-dom";
+import UsersWithYourGenre from "./pages/UsersWithYourGenre.jsx";
 // import IsAdmin from './components/IsAdmin.jsx'
 
 function App() {
@@ -36,6 +37,7 @@ function App() {
         <Route path="/" element={<Login />} />
         <Route path="/artists" element={<AllUsers />} />
         <Route path="/artists-your-area" element={<UsersInYourArea />} />
+        <Route path="/artists-your-genre" element={<UsersWithYourGenre />} />
         <Route path="/messages/:userId" element={<Messages />} />
         <Route path="/messages/message/:messageId" element={<Messages />} />
         <Route path="/profile/:userId" element={<ProfilePage />} />
