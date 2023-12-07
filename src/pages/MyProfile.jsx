@@ -179,8 +179,11 @@ function MyProfile() {
 
   return (
     <div>
-      {picProfile && <img src={picProfile} alt="Profile" width={150} />}
-      <form onSubmit={handleSubmit}>
+
+      <div className="container-img-my-profile">
+
+      {picProfile && <img src={picProfile} alt="Profile"  />}
+      <form className="profile-form"onSubmit={handleSubmit}>
         {imageUrl && <img src={imageUrl} alt="Profile" width={150} />}
         <label>Image: </label>
         <input
@@ -190,6 +193,8 @@ function MyProfile() {
           disabled={isUploading}
         />
       </form>
+
+      </div>
       <form className="edit-form" onSubmit={handleSignup}>
         <div className="info-container">
           <label>
@@ -276,16 +281,16 @@ function MyProfile() {
             <option value="Zaragoza">Zaragoza</option>
           </select>
         </div>
-
+{/* 
         <div className="video-container">
           <label>
             <strong>Video Link</strong>
           </label>
 
           <input type="url" />
-        </div>
+        </div> */}
 
-        <button type="submit">
+        <button className="boton" type="submit">
           {" "}
           <strong>Edit Profile</strong>
         </button>
@@ -293,8 +298,8 @@ function MyProfile() {
         <p style={{ color: "purple" }}>{errorMessage}</p>
       </form>
 
+        <h2 id="h2-comments">Comments:</h2>
       <div className="comments-container">
-        <h2>Comments:</h2>
         <ul>
           {comments.map((comments, index) => (
             <li key={comments._id}>
@@ -302,10 +307,11 @@ function MyProfile() {
                 <strong>{comments.commenter.username}</strong>
               </p>
               <p>{comments.comment}</p>
-
-              <button onClick={ () => handleDeleteComment(index) } type="delete">
+            
+              <button className="boton-eliminar" onClick={ () => handleDeleteComment(index) } type="delete">
                 Delete
               </button>
+              
             </li>
           ))}
         </ul>

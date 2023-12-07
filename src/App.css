@@ -3,7 +3,7 @@ body {
   width: 100%;
   max-width: 1400px;
   margin-left: 400px;
-  margin-top: -25px;
+ 
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -91,21 +91,22 @@ body {
 
 }
 
-.signup-form button {
+.signup-form button, .boton {
 margin-top: 10px;
 color: white;
 background-color: black;
-width: 100px;
+width: 110px;
 padding: 10px;
 border-radius: 10px;
 cursor: pointer;
 border: none;
+font-weight: bold;
 
 }
 
 
 
-.signup-form button:hover {
+.signup-form button:hover, .boton:hover {
   background-color:#78faae; 
   color: black; 
 }
@@ -140,3 +141,287 @@ margin-top: 300px;
 
 }
 
+
+.boton a {
+
+  color: white;
+  text-decoration: none;
+
+
+
+}
+
+.boton:hover a {
+
+color: black;
+
+}
+
+
+/* Log in  */
+
+
+/* Grid */
+
+.grid-container {
+
+display: grid;
+grid-template-columns: 1fr 1fr;
+gap: 32px;
+width: 100%;
+max-width: 100%;
+
+
+}
+
+.grid-container .grid-element {
+
+  border-radius: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  align-items: center;
+  justify-content: center;
+  -webkit-box-shadow: 9px 9px 16px 3px rgba(158,155,153,0.66); 
+  box-shadow: 9px 9px 16px 3px rgba(158,155,153,0.66);
+  padding-bottom: 30px;
+ 
+
+
+} 
+
+.grid-container .grid-element p{
+
+  margin: 0px;
+  padding: 0px;
+  
+  
+
+
+}
+
+.grid-container .grid-element img {
+
+  width: 100%;
+  max-width: 350px;
+  border-radius: 16px;
+
+
+}
+
+nav a,nav p {
+
+  text-decoration: none;
+  color: black;
+  font-weight: bold;
+  margin:0;
+  cursor: pointer;
+
+}
+
+nav {
+
+display: flex;
+gap:16px;
+align-items: center;
+margin-top: 15px;
+
+
+}
+
+
+.profile-image {
+  width: 100%;
+  max-width: 350px;
+  border-radius: 16px;
+
+
+}
+
+
+.all-users-container {
+
+  margin-top: 30px
+
+}
+
+.lista-mensajes {
+
+  background-color: white;
+  border-radius: 20px;
+  padding: 16px 10px 16px 30px;
+  list-style: none;
+  margin: 25px;
+
+}
+
+.button-container {
+
+  display: flex;
+  gap:16px;
+  align-items: center;
+ margin-top: 20px;
+  margin-bottom: 20px;
+
+
+}
+
+.left-column-all-users {
+  width: 48%;
+  padding: 20px;
+  border-radius: 10px;
+  background-color: rgba(255, 255, 255, 0.6);
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+ margin-right: 20px;
+  margin-top: 20px;
+}
+
+.comment-form {
+  display: flex;
+  flex-direction: column; 
+  align-items: center; 
+}
+
+.form-group {
+  margin-bottom: 10px; 
+}
+
+textarea {
+  width: 100%;
+  box-sizing: border-box; 
+  border-radius: 20px;
+}
+
+.comments-container {
+
+  background-color: white;
+  border-radius: 20px;
+  padding: 16px 10px 16px 30px;
+  list-style: none!important;
+  margin: 25px;
+  margin-left: 0
+
+
+}
+
+.comments-container ul {
+
+  text-decoration: none;
+
+}
+
+.comments-container li {
+
+  list-style:  none;
+
+}
+
+
+.botones-mensajes {
+
+  display: flex;
+  justify-content: flex-end; 
+  gap: 10px; 
+  margin-top: 10px; /
+
+}
+
+.boton-eliminar {
+
+  background-color: #9381ff;
+ border: none;
+ border-radius: 5px;
+ font-weight: bold;
+padding: 5px;
+width: 50px;
+
+}
+
+.boton-eliminar:hover{
+
+  background-color:#e52e5a; 
+  color: white;
+  cursor: pointer;
+}
+
+
+.container-img-my-profile img {
+
+width: 400px;
+border-radius: 20px;
+margin-top: 30px;
+
+
+
+}
+
+.info-container {
+
+  font-weight: bold;
+  text-align: left;
+  display: flex; 
+  margin-top: 40px;
+  margin-bottom: 20px;
+  flex-direction: column;
+  font-size: 13px;
+
+
+
+}
+
+.info-container label {
+
+  width: 100%; 
+  padding: 5px; 
+  margin-bottom: 2px;
+  border-radius: 5px;
+
+
+}
+
+.info-container input,
+.info-container select {
+
+  width: 500px;
+  padding: 8px;
+  margin-bottom: 2px;
+  border-radius: 10px;
+  font-size: 12px;
+  margin-top: 5px;
+  border: none;
+  
+
+
+
+}
+
+#h2-comments{
+
+margin-top:  30px;
+
+
+}
+
+
+
+.boton-eliminar-comments {
+  margin-left: 480px;
+  margin-bottom: 100;
+ background-color: #9381ff;
+  border: none;
+  border-radius: 5px;
+  font-weight: bold;
+ padding: 5px;
+ width: 70px;
+
+
+}
+
+.boton-eliminar-comments:hover {
+
+  background-color:#e52e5a; 
+  color: white;
+  cursor: pointer;
+
+
+}

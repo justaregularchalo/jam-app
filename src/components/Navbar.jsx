@@ -33,6 +33,7 @@ function Navbar() {
   if (isLoggedIn) {
     return (
       <nav>
+       <img src="./images/jam-logo.png" alt="Logo" width={50} />
         {/* <NavLink to="/" style={toggleStyles}>Home</NavLink>| */}
         <NavLink to="/artists" style={toggleStyles}>
           all artists
@@ -50,7 +51,7 @@ function Navbar() {
           my profile
         </NavLink>
         |{/* <NavLink to="/admin" style={toggleStyles}>Admin</NavLink>| */}
-        <p onClick={handleLogout}>Log Out</p>
+        <p onClick={handleLogout}>log out</p>
       </nav>
     );
   } else {

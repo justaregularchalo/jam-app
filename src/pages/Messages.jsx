@@ -2,6 +2,7 @@ import { Link, useParams } from "react-router-dom";
 import { useContext, useEffect, useState } from "react";
 import { AuthContext } from "../context/auth.context";
 import { useNavigate } from "react-router-dom";
+import { NavLink } from "react-router-dom";
 import service from "../services/config";
 
 function Messages() {
@@ -17,30 +18,36 @@ function Messages() {
 
   const handleMessageSubmit = async (e) => {
     e.preventDefault();
-
-    try {
-      const messageCreated = {
-        sender: loggedUser._id,
-        receiver: params.userId,
-        message: newMessage,
-        // picProfile: loggedUser.picProfile, 
-      };
-
-      await service.post(`messages/${params.userId}`, messageCreated);
-      getUsers();
-      setMessages((previousMessages) => {
-        const newArrMess = [...previousMessages];
-
-        newArrMess.push(messageCreated);
-        return newArrMess;
-      });
-
-      setNewMessage("");
-      navigate(`/messages/${params.userId}`);
-    } catch (error) {
-      console.log(error);
+  
+    // Verificar si newMessage no está vacío antes de enviar
+    if (newMessage.trim() !== "") {
+      try {
+        const messageCreated = {
+          sender: loggedUser._id,
+          receiver: params.userId,
+          message: newMessage,
+          
+        };
+  
+        await service.post(`messages/${params.userId}`, messageCreated);
+        getUsers();
+        setMessages((previousMessages) => {
+          const newArrMess = [...previousMessages];
+          newArrMess.push(messageCreated);
+          return newArrMess;
+        });
+  
+        setNewMessage("");
+        navigate(`/messages/${params.userId}`);
+      } catch (error) {
+        console.log(error);
+      }
+    } else {
+      // Muestra un mensaje o realiza alguna acción si el mensaje está vacío
+      console.log("Error: Message cant be blank");
     }
   };
+  
 
   useEffect(() => {
     getUsers();
@@ -65,23 +72,24 @@ function Messages() {
 
   const handleDeleteMessage = async (indexToDelete) => {
     console.log("Intentando borrar el índice", indexToDelete);
-  
+
     try {
       const clone = JSON.parse(JSON.stringify(messages));
       clone.splice(indexToDelete, 1);
-  
+
       const messageIdToDelete = messages[indexToDelete]._id;
-  
-      await service.delete(`messages/message/${params.messageId, messageIdToDelete}`);
-      
+
+      await service.delete(
+        `messages/message/${(params.messageId, messageIdToDelete)}`
+      );
+
       setMessages(clone);
-  
+
       navigate(`/messages/${params.userId}`);
     } catch (err) {
       console.log(err);
     }
   };
-
 
   if (isLoading) {
     return <h3>...lodeando</h3>;
@@ -99,8 +107,8 @@ function Messages() {
       </h2>
 
       <div className="message-container">
-        <h4>Messages</h4>
-        <ul>
+      
+        <ul className="lista-mensajes">
           {messagesToShow.map((message, index) => (
             <li key={message._id}>
               {/* <img src={message.sender.picProfile} /> */}
@@ -108,12 +116,16 @@ function Messages() {
                 <strong>{message.sender.username}</strong>
               </p>
               <p>{message.message}</p>
-              <button onClick={ () => handleDeleteMessage(index) }>Delete</button>
+
+              {message.sender._id === loggedUser._id && (
+                <button className="boton-eliminar" onClick={() => handleDeleteMessage(index)}>
+                  Delete
+                </button>
+              )}
             </li>
           ))}
         </ul>
       </div>
-
       <form onSubmit={handleMessageSubmit}>
         <label htmlFor="message">
           <strong>Say sumthing!</strong>
@@ -126,8 +138,18 @@ function Messages() {
           value={newMessage}
           onChange={(e) => setNewMessage(e.target.value)}
         ></textarea>
-        <button type="submit">Send Message</button>
       </form>
+      <div className="botones-mensajes"> 
+      
+      <button className="boton">
+        <NavLink to={`/profile/${params.userId}`}>Go back</NavLink>
+      </button>
+      <button className="boton" onClick={handleMessageSubmit} type="submit">
+        Send
+      </button>
+      
+      
+      </div>
     </div>
   );
 }

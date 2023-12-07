@@ -49,11 +49,13 @@ function Login() {
   };
 
   return (
-    <div>
+    <div className="signup-container">
 
+<div className="left-column"> 
       <h1>Log</h1>
 
-      <form onSubmit={handleLogin}>
+
+      <form className="signup-form"  onSubmit={handleLogin}>
         <label>username:</label>
         <input
           type="username"
@@ -80,6 +82,17 @@ function Login() {
       <p style={{color: "purple"}}>{errorMessage}</p>
 
       <NavLink to="/signup"> Don't have an account? Sign Up</NavLink>
+
+
+
+
+</div>
+      <div className="right-column"> 
+
+      <img src="./images/jam-signup.jpg" alt="signup" width={700}/>
+
+      </div>
+
 
     </div>
   );

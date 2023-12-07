@@ -151,7 +151,7 @@ function UsersWithYourGenre() {
 
     <h3>Artists who play {userGenre} </h3>
 
-    <div>
+    <div className="grid-container">
 
     {users.map((eachUser)=>{
 
@@ -159,14 +159,14 @@ function UsersWithYourGenre() {
 
       return (
 
-      <div key={eachUser.username}>
+      <div className="grid-element" key={eachUser.username}>
 
         <img src={eachUser.picProfile} alt={eachUser.username} width={200} />
-        <p>Name: {eachUser.username}</p>
-        <p>Instrument: {eachUser.instrument}</p>
-        <p>location: {eachUser.location}</p>
+        <p><strong>{eachUser.username}</strong></p>
+        <p>{eachUser.instrument}</p>
+        <p>{eachUser.location}</p>
 
-        <button>
+        <button className="boton">
             <NavLink to={`/profile/${eachUser._id}`}>View Profile</NavLink>
           </button>
 

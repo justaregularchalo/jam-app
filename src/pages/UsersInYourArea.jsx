@@ -151,7 +151,7 @@ function UsersInYourArea() {
 
     <h3>Artists in {userLocation} </h3>
 
-    <div>
+    <div className="grid-container">
 
     {users.map((eachUser)=>{
 
@@ -159,14 +159,14 @@ function UsersInYourArea() {
 
       return (
 
-      <div key={eachUser.username}>
+      <div className="grid-element" key={eachUser.username}>
 
         <img src={eachUser.picProfile} alt={eachUser.username} />
         <p>Name: {eachUser.username}</p>
         <p>Instrument: {eachUser.instrument}</p>
         <p>location: {eachUser.location}</p>
 
-        <button>
+        <button className="boton">
             <NavLink to={`/profile/${eachUser._id}`}>View Profile</NavLink>
           </button>
 
