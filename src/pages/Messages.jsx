@@ -63,7 +63,27 @@ function Messages() {
     }
   };
 
-  const handleDeleteMessage = async (e) => {};
+  const handleDeleteMessage = async (e) => {
+    try {
+
+      const messageToDelete = {
+
+        message:params.messageId
+
+      };
+
+      if (!params.messageId) {
+        console.error("never ID");
+        return;
+      }
+
+      await service.delete(`messages/message/${params.messageId}`, messageToDelete );
+
+      navigate(`/message/${params.userId}`)
+    } catch (error) {
+      console.log(error);
+    }
+  };
 
   if (isLoading) {
     return <h3>...lodeando</h3>;

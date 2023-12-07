@@ -167,15 +167,6 @@ const handleToDeleteComment = async (e) => {
 
   
   try {
-<<<<<<< HEAD
-
-    const commentDeleted = {
-      
-
-    }
-    await service.delete(`comment/${commentId}`)
-    setComments()
-=======
     
     const commentDeleted = {
       commenter: loggedUser._id,
@@ -189,7 +180,6 @@ const handleToDeleteComment = async (e) => {
    await service.get(`comment/${params.userId}`, commentDeleted)
     setComments("")
     navigate(`/profile/${params.userId}`)
->>>>>>> 1b8c23d318df160983076c27476ae97340e1c82b
 
   } catch(err){
     console.log(err)

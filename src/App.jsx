@@ -58,6 +58,7 @@ function App() {
     <Route path="/artists" element={<AllUsers />} />
     <Route path="/artists-your-area" element={<UsersInYourArea />} />
     <Route path="/messages/:userId" element={<Messages />} />
+    <Route path="/messages/message/:messageId" element={<Messages />} />
     <Route path="/profile/:userId" element={<ProfilePage />} />
     <Route path="/my-profile" element={<MyProfile />} />
     {/* <Route path="/edit-profile" element={<ProfileEdit />} /> */}
