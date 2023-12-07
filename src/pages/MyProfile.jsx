@@ -5,7 +5,6 @@ import service from "../services/config";
 import axios from "axios";
 import { useParams } from "react-router-dom";
 
-
 function MyProfile() {
   const { loggedUser } = useContext(AuthContext);
   const params = useParams();
@@ -40,10 +39,8 @@ function MyProfile() {
   const handlePicProfileChange = (e) => setPicProfile(e.target.value);
   const handleVidProfileChange = (e) => setVidProfile(e.target.value);
 
-
   const handleSignup = async (e) => {
     e.preventDefault();
-
 
     // contactamos al backend, muñeco
     try {
@@ -80,9 +77,6 @@ function MyProfile() {
     userComment();
   }, []);
 
-
-
-
   // const getPicProfile = async () =>{
   //   try {
   //     const response = await service.get
@@ -92,7 +86,6 @@ function MyProfile() {
   // }
 
   const getMyProfile = async () => {
-
     try {
       const response = await service.get("/my-profile");
       setUsername(response.data.username);
@@ -101,14 +94,14 @@ function MyProfile() {
       setGenre(response.data.genre);
       setLocation(response.data.location);
       setBio(response.data.bio);
-      setPicProfile(response.data.picProfile)
+      setPicProfile(response.data.picProfile);
       setVidProfile(response.data.vidProfile);
       setIsloading(false);
     } catch (error) {
       console.log(error);
     }
   };
-//! esto es para guardar la imagen
+  //! esto es para guardar la imagen
   const handleFileUpload = async (event) => {
     if (!event.target.files[0]) {
       // to prevent accidentally clicking the choose file button and not selecting a file
@@ -125,7 +118,7 @@ function MyProfile() {
         uploadData
       );
       // !IMPORTANT: Adapt the request structure to the one in your proyect (services, .env, auth, etc...)
-      
+
       //                          |
       //     this is how the backend sends the image to the frontend => res.json({ imageUrl: req.file.path });
       setIsUploading(false); // to stop the loading animation
@@ -138,53 +131,47 @@ function MyProfile() {
     event.preventDefault();
     const newItem = {
       name: name,
-      image: imageUrl
-    }
+      image: imageUrl,
+    };
 
     try {
-      await axios.post("http://localhost:5005/api/my-profile", newItem)
+      await axios.post("http://localhost:5005/api/my-profile", newItem);
 
-      navigate("/my-profile/:userId")
-    } catch(err){
-      navigate("/error")
+      navigate("/my-profile/:userId");
+    } catch (err) {
+      navigate("/error");
     }
-  }
+  };
 
   const userComment = async (e) => {
     try {
-
-
       const profileComment = await service.get(`comment/${loggedUser._id}`);
-setComments(profileComment.data)
-console.log("AAAAAAA", comments)
+      setComments(profileComment.data);
+      console.log("AAAAAAA", comments);
     } catch (error) {
       console.log(error);
     }
   };
 
-const handleToDeleteComment = async (e) => {
-  e.preventDefault()
-
   
-  try {
-    
-    const commentDeleted = {
-      commenter: loggedUser._id,
-      user: params.userId,
-      comment: params.commentId
-    };
-    
-    console.log("EEEEOOOO", params.userId)
-
-
-   await service.get(`comment/${params.userId}`, commentDeleted)
-    setComments("")
-    navigate(`/profile/${params.userId}`)
-
-  } catch(err){
-    console.log(err)
-  }
-} 
+  const handleDeleteComment = async (indexToDelete) => {
+    console.log("Intentando borrar el índice", indexToDelete);
+  
+    try {
+      const clone = JSON.parse(JSON.stringify(comments));
+      clone.splice(indexToDelete, 1);
+  
+      const commentIdToDelete = comments[indexToDelete]._id;
+  
+      await service.delete(`comment/comment/${params.commentId, commentIdToDelete}`);
+      
+      setComments(clone);
+  
+      navigate("/my-profile");
+    } catch (err) {
+      console.log(err);
+    }
+  };
 
   if (isLoading) {
     return <h3>...lodeando</h3>;
@@ -192,17 +179,17 @@ const handleToDeleteComment = async (e) => {
 
   return (
     <div>
-      {picProfile && <img src={picProfile} alt="Profile" width={150}/>}
-          <form onSubmit={handleSubmit}>
-      {imageUrl && <img src={imageUrl} alt="Profile" width={150}/>}
-            <label>Image: </label>
-            <input
-              type="file"
-              name="image"
-              onChange={handleFileUpload}
-              disabled={isUploading}
-            />
-          </form>
+      {picProfile && <img src={picProfile} alt="Profile" width={150} />}
+      <form onSubmit={handleSubmit}>
+        {imageUrl && <img src={imageUrl} alt="Profile" width={150} />}
+        <label>Image: </label>
+        <input
+          type="file"
+          name="image"
+          onChange={handleFileUpload}
+          disabled={isUploading}
+        />
+      </form>
       <form className="edit-form" onSubmit={handleSignup}>
         <div className="info-container">
           <label>
@@ -307,18 +294,22 @@ const handleToDeleteComment = async (e) => {
       </form>
 
       <div className="comments-container">
-          <h2>Comments:</h2>
-          <ul>
-            {comments.map((comments) => (
-              <li key={comments._id}>
-                <p><strong>{comments.commenter.username}</strong></p>
-                <p>{comments.comment}</p>
-                
-                <button onClick={handleToDeleteComment} type="delete">Delete</button>
-              </li>
-            ))}
-          </ul>
-        </div>
+        <h2>Comments:</h2>
+        <ul>
+          {comments.map((comments, index) => (
+            <li key={comments._id}>
+              <p>
+                <strong>{comments.commenter.username}</strong>
+              </p>
+              <p>{comments.comment}</p>
+
+              <button onClick={ () => handleDeleteComment(index) } type="delete">
+                Delete
+              </button>
+            </li>
+          ))}
+        </ul>
+      </div>
     </div>
   );
 }

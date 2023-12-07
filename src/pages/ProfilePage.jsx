@@ -1,5 +1,4 @@
 import { Link, useParams } from "react-router-dom";
-import axios from "axios";
 import { useState, useEffect, useContext } from "react";
 import service from "../services/config";
 import { NavLink } from "react-router-dom";

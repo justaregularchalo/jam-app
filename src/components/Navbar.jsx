@@ -1,25 +1,22 @@
 import { useContext } from "react";
 import { NavLink, useNavigate } from "react-router-dom";
 import { AuthContext } from "../context/auth.context";
- 
+
 function Navbar() {
+  const navigate = useNavigate();
 
-  const navigate = useNavigate()
-
-  const { isLoggedIn, authenticateUser } = useContext(AuthContext)
-
-  
+  const { isLoggedIn, authenticateUser } = useContext(AuthContext);
 
   const handleLogout = () => {
     // borramos el token
-    localStorage.removeItem("authToken")
+    localStorage.removeItem("authToken");
 
     // actualizamos el estado del user con el context de auth
-    authenticateUser()
+    authenticateUser();
 
     // redireccinamos al login con navigate
-    navigate("/")
-  }
+    navigate("/");
+  };
 
   const toggleStyles = (navInfo) => {
     return navInfo.isActive === true ? activeStyles : inActiveStyles;
@@ -37,25 +34,28 @@ function Navbar() {
     return (
       <nav>
         {/* <NavLink to="/" style={toggleStyles}>Home</NavLink>| */}
-        <NavLink to="/artists" style={toggleStyles}>all artists</NavLink>|
-        <NavLink to="/artists-your-area" style={toggleStyles}>artists in your area</NavLink>|
-        <NavLink to="/my-profile" style={toggleStyles}>my profile</NavLink>|
-
-        {/* <NavLink to="/admin" style={toggleStyles}>Admin</NavLink>| */}
+        <NavLink to="/artists" style={toggleStyles}>
+          all artists
+        </NavLink>
+        |
+        <NavLink to="/artists-your-area" style={toggleStyles}>
+          artists in your area
+        </NavLink>
+        |
+        <NavLink to="/my-profile" style={toggleStyles}>
+          my profile
+        </NavLink>
+        |{/* <NavLink to="/admin" style={toggleStyles}>Admin</NavLink>| */}
         <p onClick={handleLogout}>Log Out</p>
       </nav>
     );
   } else {
     return (
       <nav>
-       
-       
         {/* <NavLink to="/login" style={toggleStyles}>Log In</NavLink> */}
       </nav>
-  );
+    );
   }
-
-  
 }
 
-export default Navbar
+export default Navbar;

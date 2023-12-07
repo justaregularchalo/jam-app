@@ -23,7 +23,7 @@ function Messages() {
         sender: loggedUser._id,
         receiver: params.userId,
         message: newMessage,
-        // picProfile: loggedUser.picProfile,
+        // picProfile: loggedUser.picProfile, 
       };
 
       await service.post(`messages/${params.userId}`, messageCreated);
@@ -63,27 +63,25 @@ function Messages() {
     }
   };
 
-  const handleDeleteMessage = async (e) => {
+  const handleDeleteMessage = async (indexToDelete) => {
+    console.log("Intentando borrar el índice", indexToDelete);
+  
     try {
-
-      const messageToDelete = {
-
-        message:params.messageId
-
-      };
-
-      if (!params.messageId) {
-        console.error("never ID");
-        return;
-      }
-
-      await service.delete(`messages/message/${params.messageId}`, messageToDelete );
-
-      navigate(`/message/${params.userId}`)
-    } catch (error) {
-      console.log(error);
+      const clone = JSON.parse(JSON.stringify(messages));
+      clone.splice(indexToDelete, 1);
+  
+      const messageIdToDelete = messages[indexToDelete]._id;
+  
+      await service.delete(`messages/message/${params.messageId, messageIdToDelete}`);
+      
+      setMessages(clone);
+  
+      navigate(`/messages/${params.userId}`);
+    } catch (err) {
+      console.log(err);
     }
   };
+
 
   if (isLoading) {
     return <h3>...lodeando</h3>;
@@ -103,14 +101,14 @@ function Messages() {
       <div className="message-container">
         <h4>Messages</h4>
         <ul>
-          {messagesToShow.map((message) => (
+          {messagesToShow.map((message, index) => (
             <li key={message._id}>
               {/* <img src={message.sender.picProfile} /> */}
               <p>
                 <strong>{message.sender.username}</strong>
               </p>
               <p>{message.message}</p>
-              <button onClick={handleDeleteMessage}>Delete</button>
+              <button onClick={ () => handleDeleteMessage(index) }>Delete</button>
             </li>
           ))}
         </ul>
