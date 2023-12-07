@@ -8,6 +8,7 @@ import { useParams } from "react-router-dom";
 
 function MyProfile() {
   const { loggedUser } = useContext(AuthContext);
+  const params = useParams();
 
   // console.log(loggedUser)
   const [imageUrl, setImageUrl] = useState(null);
@@ -164,7 +165,9 @@ console.log("AAAAAAA", comments)
 const handleToDeleteComment = async (e) => {
   e.preventDefault()
 
+  
   try {
+<<<<<<< HEAD
 
     const commentDeleted = {
       
@@ -172,6 +175,21 @@ const handleToDeleteComment = async (e) => {
     }
     await service.delete(`comment/${commentId}`)
     setComments()
+=======
+    
+    const commentDeleted = {
+      commenter: loggedUser._id,
+      user: params.userId,
+      comment: params.commentId
+    };
+    
+    console.log("EEEEOOOO", params.userId)
+
+
+   await service.get(`comment/${params.userId}`, commentDeleted)
+    setComments("")
+    navigate(`/profile/${params.userId}`)
+>>>>>>> 1b8c23d318df160983076c27476ae97340e1c82b
 
   } catch(err){
     console.log(err)
