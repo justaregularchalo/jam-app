@@ -165,8 +165,13 @@ const handleToDeleteComment = async (e) => {
   e.preventDefault()
 
   try {
-    const commentDeleted = await service.get(`comment/${loggedUser._id}`)
-    setComments(commentDeleted)
+
+    const commentDeleted = {
+      
+
+    }
+    await service.delete(`comment/${commentId}`)
+    setComments()
 
   } catch(err){
     console.log(err)

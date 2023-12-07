@@ -4,7 +4,6 @@ import { AuthContext } from "../context/auth.context";
 import { useNavigate } from "react-router-dom";
 import service from "../services/config";
 
-
 function Messages() {
   const { loggedUser } = useContext(AuthContext);
   const params = useParams();
@@ -24,15 +23,16 @@ function Messages() {
         sender: loggedUser._id,
         receiver: params.userId,
         message: newMessage,
+        // picProfile: loggedUser.picProfile,
       };
 
       await service.post(`messages/${params.userId}`, messageCreated);
       getUsers();
       setMessages((previousMessages) => {
-        const newArrMess = [...previousMessages]
+        const newArrMess = [...previousMessages];
 
-        newArrMess.push(messageCreated)
-        return newArrMess
+        newArrMess.push(messageCreated);
+        return newArrMess;
       });
 
       setNewMessage("");
@@ -57,23 +57,21 @@ function Messages() {
 
       const allMessages = await service.get(`/messages/${params.userId}`);
       setMessages(allMessages.data);
-      // console.log(allMessages.data);
+      console.log(allMessages.data);
     } catch (error) {
       console.log(error);
     }
   };
 
+  const handleDeleteMessage = async (e) => {};
+
   if (isLoading) {
     return <h3>...lodeando</h3>;
   }
 
-  const filterMessagesByReceiver = (message) => {
-    return message.receiver === params.userId;
-  };
-
-  const messagesToShow = messages
-    .filter(filterMessagesByReceiver)
-    .sort((a, b) => new Date(a.createdAt) - new Date(b.createdAt));
+  const messagesToShow = messages.sort(
+    (a, b) => new Date(a.createdAt) - new Date(b.createdAt)
+  );
 
   return (
     <div>
@@ -87,10 +85,12 @@ function Messages() {
         <ul>
           {messagesToShow.map((message) => (
             <li key={message._id}>
+              {/* <img src={message.sender.picProfile} /> */}
               <p>
                 <strong>{message.sender.username}</strong>
               </p>
               <p>{message.message}</p>
+              <button onClick={handleDeleteMessage}>Delete</button>
             </li>
           ))}
         </ul>
