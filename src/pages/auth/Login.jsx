@@ -89,7 +89,7 @@ function Login() {
 </div>
       <div className="right-column"> 
 
-      <img src="./images/jam-signup.jpg" alt="signup" width={700}/>
+      <img src="./images/login image.png" alt="signup" width={700}/>
 
       </div>
 

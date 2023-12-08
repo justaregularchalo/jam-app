@@ -162,9 +162,9 @@ function UsersInYourArea() {
       <div className="grid-element" key={eachUser.username}>
 
         <img src={eachUser.picProfile} alt={eachUser.username} />
-        <p>Name: {eachUser.username}</p>
-        <p>Instrument: {eachUser.instrument}</p>
-        <p>location: {eachUser.location}</p>
+        <p> <strong>{eachUser.username}</strong> </p>
+        <p> {eachUser.instrument}</p>
+        <p> {eachUser.location}</p>
 
         <button className="boton">
             <NavLink to={`/profile/${eachUser._id}`}>View Profile</NavLink>
