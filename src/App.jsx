@@ -33,8 +33,9 @@ function App() {
 
       <Routes>
         {/* <Route path="/" element={<Home />} /> */}
-        <Route path="/signup" element={<Signup />} />
         <Route path="/" element={<Login />} />
+        <Route path="/signup" element={<Signup />} />
+        <Route path="/my-profile" element={<MyProfile />} />
         <Route path="/artists" element={<AllUsers />} />
         <Route path="/artists-your-area" element={<UsersInYourArea />} />
         <Route path="/artists-your-genre" element={<UsersWithYourGenre />} />
@@ -42,8 +43,7 @@ function App() {
         <Route path="/messages/message/:messageId" element={<Messages />} />
         <Route path="/profile/:userId" element={<ProfilePage />} />
         <Route path="/comment/comment/:commentId" element={<MyProfile />} />
-        <Route path="/my-profile" element={<MyProfile />} />
-        {/* <Route path="/edit-profile" element={<ProfileEdit />} /> */}
+
 
         <Route path="/error" element={<Error />} />
         <Route path="*" element={<NotFound />} />
