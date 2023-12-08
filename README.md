@@ -1,6 +1,6 @@
 https://jam-app-project.netlify.app/
 
-[Jam Logo] (./public/images/jam-logo.png)
+[Logo] (./public/images/jam-logo.png)
 
 Description
 
@@ -130,11 +130,11 @@ auth.context
 Links
 
 Collaborators 
-[link]https://github.com/justaregularchalo
-[link]https://github.com/miguelreched
+https://github.com/justaregularchalo
+https://github.com/miguelreched
 
 Projects
-[link]https://github.com/justaregularchalo/jam-app-client
-[link]https://github.com/justaregularchalo/jam-app-server
-[link]https://jam-app-project.netlify.app/
+https://github.com/justaregularchalo/jam-app-client
+https://github.com/justaregularchalo/jam-app-server
+https://jam-app-project.netlify.app/
 
