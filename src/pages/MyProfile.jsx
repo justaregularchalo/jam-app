@@ -114,7 +114,7 @@ function MyProfile() {
     //     this name needs to match the name used in the middleware in the backend => uploader.single("image")
     try {
       const response = await service.patch(
-        "http://localhost:5005/api/my-profile/edited-image",
+        "/my-profile/edited-image",
         uploadData
       );
       // !IMPORTANT: Adapt the request structure to the one in your proyect (services, .env, auth, etc...)
@@ -135,7 +135,7 @@ function MyProfile() {
     };
 
     try {
-      await axios.post("http://localhost:5005/api/my-profile", newItem);
+      await service.post("/my-profile", newItem);
 
       navigate("/my-profile/:userId");
     } catch (err) {

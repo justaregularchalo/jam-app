@@ -136,5 +136,4 @@ Collaborators
 Projects
 [link]https://github.com/justaregularchalo/jam-app-client
 [link]https://github.com/justaregularchalo/jam-app-server
-[link]https://jam-app-project.netlify.app/
-
+[link]https://jam-app-project.netlify.ap
